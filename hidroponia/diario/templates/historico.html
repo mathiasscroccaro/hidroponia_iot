@@ -1,0 +1,28 @@
+{% load staticfiles %}
+
+<html>
+<meta name="viewport" content="width=device-width">
+    <head>
+        <title>Histórico</title>
+		<link rel="stylesheet" href="{% static 'estilo.css'%}">
+    </head>
+    <body>
+
+	<div class="cabecalho">
+		<h1>Diário de cultivo</h1>
+
+		<ul>
+			<li><a href="/temporeal">Tempo Real</a></li>
+			<li><a href="/historico">Historico</a></li>
+			<li><a href="/cadastrar">Cadastrar</a></li>
+		</ul>
+	</div>
+
+	{% for post in posts %}
+		<div>
+        	<p>Data: {{ post.data_publicacao }}</p>
+        	<p>{{ post.comentarios|linebreaksbr }}</p>
+		</div>
+	{% endfor %}
+    </body>
+</html>

@@ -5,7 +5,7 @@ from django.http import HttpResponse
 from .models import Post
 
 def index(request):
-	return redirect('/historico')
+	return redirect('/temporeal')
 
 def temporeal(request):
 	return render(request,'temporeal.html',{})

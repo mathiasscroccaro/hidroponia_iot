@@ -1,15 +1,25 @@
 
 body {
 	padding-top: 15px;
-	text-align: center
+	text-align: center;
+	width:800px;
+	margin:auto;
 }
 
 .cabecalho {
-	margin: auto;
-	width:800px;
 	background-color:#2E8B57;
 	color: White;
 	padding-top:10px;
+	font-family: "Comic Sans MS", cursive, sans-serif;
+}
+
+.post {
+	background-color:#2E8B57;
+	color: White;
+	padding-top:10px;
+	padding-bottom:10px;
+	padding-left:10px;
+	padding-right:10px;
 	font-family: "Comic Sans MS", cursive, sans-serif;
 }
 

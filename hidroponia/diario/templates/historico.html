@@ -19,10 +19,11 @@
 	</div>
 
 	{% for post in posts %}
-		<div>
-        	<p>Data: {{ post.data_publicacao }}</p>
-        	<p>{{ post.comentarios|linebreaksbr }}</p>
-		</div>
+	<div class="post">
+    	<p>Data: {{ post.data_publicacao }}</p>
+    	<p>{{ post.comentarios|linebreaksbr }}</p>
+		
+	</div>
 	{% endfor %}
     </body>
 </html>

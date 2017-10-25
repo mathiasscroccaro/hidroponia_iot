@@ -3,4 +3,4 @@
 *.png
 *.jpg
 *.jpeg
-./diario/migrations/*
+diario/migrations/*

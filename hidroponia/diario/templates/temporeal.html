@@ -1,9 +1,27 @@
+{% load staticfiles %}
+
 <html>
+<meta name="viewport" content="width=device-width">
     <head>
-        <title>Ola's blog</title>
+        <title>Diario de Cultivo :: Tempo Real</title>
+		<link rel="stylesheet" href="{% static 'estilo.css'%}">
     </head>
     <body>
-        <p>Hi there!</p>
-        <p>It works!</p>
+
+	<div class="cabecalho">
+		<h1>Diário de cultivo</h1>
+
+		<ul>
+			<li><a href="/temporeal">Tempo Real</a></li>
+			<li><a href="/historico">Historico</a></li>
+			<li><a href="/cadastrar">Cadastrar</a></li>
+		</ul>
+	</div>
+
+	{% for post in posts %}
+	<div class="post">
+    	<img src="{{MEDIA_URL}}/{{ post.historico_ph }}" />
+	</div>
+	{% endfor %}
     </body>
 </html>

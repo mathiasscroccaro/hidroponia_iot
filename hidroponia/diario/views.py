@@ -8,7 +8,8 @@ def index(request):
 	return redirect('/temporeal')
 
 def temporeal(request):
-	return render(request,'temporeal.html',{})
+	posts = Post.objects.order_by('-data_publicacao')
+	return render(request,'temporeal.html',{'posts':posts})
 
 def historico(request,ano=2017,mes=1,dia=1):
 	posts = Post.objects.order_by('-data_publicacao')

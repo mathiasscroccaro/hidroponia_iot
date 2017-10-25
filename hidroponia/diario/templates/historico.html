@@ -22,27 +22,27 @@
 	<div class="post">
     	<p><h3><b>Data: {{ post.data_publicacao }}</b></h3></p>
     	<p>{{ post.comentarios|linebreaksbr }}</p>
-		
+				
 		<table>
 			<tr>
 				<td>pH da água:</td>
-				<td>7</td>
+				<td>{{ post.ph }}</td>
 			</tr>
 			<tr>
 				<td>Temperatura da água:</td>
-				<td>15 ºC</td>
+				<td>{{ post.temp_agua }}</td>
 			</tr>
 			<tr>
 				<td>Temperatura do ar:</td>
-				<td>20 ºC</td>
+				<td>{{ post.temp_ar }}</td>
 			</tr>
 			<tr>
 				<td>Iluminância</td>
-				<td>10 lux</td>
+				<td>{{ post.lux }}</td>
 			</tr>
 		</table>
 
-		<img src="{{MEDIA_URL}}/{{ post.historico_ph }}" />
+		<img src="{{MEDIA_URL}}/{{ post.foto }}" />
 	</div>
 	{% endfor %}
     </body>

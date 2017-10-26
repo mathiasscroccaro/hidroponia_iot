@@ -3,7 +3,7 @@
 <html>
 <meta name="viewport" content="width=device-width">
     <head>
-        <title>Diario de Cultivo :: Tempo Real</title>
+        <title>Diário de Cultivo :: Tempo Real</title>
 		<link rel="stylesheet" href="{% static 'estilo.css'%}">
     </head>
     <body>
@@ -18,10 +18,34 @@
 		</ul>
 	</div>
 
-	{% for post in posts %}
-	<div class="post">
-    	
-	</div>
-	{% endfor %}
+		<table>
+			<tr>
+				<td><img src="https://blog.emania.com.br/content/uploads/2015/12/paisagem-tropical-wallpaper-1.jpg"></td>
+				<td width="40%">
+					<table>
+						<tr>
+							<td colspan = "2"><b>Dados da ultima amostragem:</b><td>
+						</tr>
+						<tr>
+							<td>pH da água:</td>
+							<td>{{ medidas.0 }}</td>
+						</tr>
+						<tr>
+							<td>Temperatura da água:</td>
+							<td>{{ medidas.1 }}</td>
+						</tr>
+						<tr>
+							<td>Temperatura do ar:</td>
+							<td>{{ medidas.2 }}</td>
+						</tr>
+						<tr>
+							<td>Iluminância</td>
+							<td>{{ medidas.3 }}</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+		</table>
+
     </body>
 </html>

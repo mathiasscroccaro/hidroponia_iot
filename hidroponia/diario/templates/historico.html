@@ -22,27 +22,38 @@
 	<div class="post">
     	<p><h3><b>Data: {{ post.data_publicacao }}</b></h3></p>
     	<p>{{ post.comentarios|linebreaksbr }}</p>
-				
+
 		<table>
 			<tr>
-				<td>pH da água:</td>
-				<td>{{ post.ph }}</td>
-			</tr>
-			<tr>
-				<td>Temperatura da água:</td>
-				<td>{{ post.temp_agua }}</td>
-			</tr>
-			<tr>
-				<td>Temperatura do ar:</td>
-				<td>{{ post.temp_ar }}</td>
-			</tr>
-			<tr>
-				<td>Iluminância</td>
-				<td>{{ post.lux }}</td>
+				<td><img src="{{MEDIA_URL}}{{ post.foto }}" /></td>
+				<td width="40%">
+					<table>
+						<tr>
+							<td colspan = "2"><b>Dados da amostragem:</b><td>
+						</tr>
+						<tr>
+							<td>pH da água:</td>
+							<td>{{ post.ph }}</td>
+						</tr>
+						<tr>
+							<td>Temperatura da água:</td>
+							<td>{{ post.temp_agua }}</td>
+						</tr>
+						<tr>
+							<td>Temperatura do ar:</td>
+							<td>{{ post.temp_ar }}</td>
+						</tr>
+						<tr>
+							<td>Iluminância</td>
+							<td>{{ post.lux }}</td>
+						</tr>
+						<tr>
+							<td style="background-color:White" colspan="2" align="right"><i><a href="{{MEDIA_URL}}{{ post.historico_medicoes }}">relatorio.txt</i></td>
+						</tr>
+					</table>
+				</td>
 			</tr>
 		</table>
-
-		<img src="{{MEDIA_URL}}/{{ post.foto }}" />
 	</div>
 	{% endfor %}
     </body>

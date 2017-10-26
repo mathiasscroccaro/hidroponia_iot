@@ -8,7 +8,7 @@ import datetime
 class Post(models.Model):
     
 	comentarios = models.TextField(default="(Amostragem feita automaticamente)")
-	data_publicacao = models.DateTimeField(default=datetime.datetime.now(),editable=False)
+	data_publicacao = models.DateTimeField(auto_now=True,editable=False)
 	
 	# Histórico de um dia de medições
 	historico_medicoes = models.FileField(upload_to='historico/%Y/%m/%d',editable=True)

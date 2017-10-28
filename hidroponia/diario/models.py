@@ -25,3 +25,11 @@ class Post(models.Model):
 	def __str__(self):
 		return self.comentarios
 
+
+class Amostra(models.Model):
+	data_amostragem = models.DateTimeField(auto_now=True,editable=False)
+	
+	ph = models.FloatField(editable=False)
+	temp_agua = models.FloatField(editable=False)
+	temp_ar = models.FloatField(editable=False)
+	lux = models.FloatField(editable=False)

@@ -37,7 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-	'diario'
+	'diario',
+	'django_crontab'
 ]
 
 MIDDLEWARE = [
@@ -51,6 +52,7 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'hidroponia.urls'
+
 
 TEMPLATES = [
     {
@@ -127,3 +129,8 @@ MEDIA_ROOT = os.path.join(BASE_DIR,'media')
 
 STATIC_URL = '/static/'
 
+
+CRONJOBS = [
+	('*/2 * * * *', 'diario.cron.amostragem'),
+	('* * * * *','diario.cron.postagem')
+]

@@ -8,4 +8,5 @@ urlpatterns = [
 	url(r'^historico/',views.historico),
 	url(r'^temporeal/',views.temporeal),
 	url(r'^cadastrar/',views.cadastrar),
+	url(r'^buscar',views.buscar),
 ]

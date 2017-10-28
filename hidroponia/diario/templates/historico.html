@@ -1,7 +1,7 @@
 {% load staticfiles %}
 
 <html>
-<meta name="viewport" content="width=device-width">
+<meta name="viewport" content="width=device-width"/>
     <head>
         <title>Diário de Cultivo :: Histórico</title>
 		<link rel="stylesheet" href="{% static 'estilo.css'%}">
@@ -15,6 +15,7 @@
 			<li><a href="/temporeal">Tempo Real</a></li>
 			<li><a href="/historico">Historico</a></li>
 			<li><a href="/cadastrar">Cadastrar</a></li>
+			<li><a href="/buscar">Buscar</a></li>
 		</ul>
 	</div>
 
@@ -48,7 +49,7 @@
 							<td>{{ post.lux }}</td>
 						</tr>
 						<tr>
-							<td style="background-color:White" colspan="2" align="right"><i><a href="{{MEDIA_URL}}{{ post.historico_medicoes }}">relatorio.txt</i></td>
+							<td style="background-color:White" colspan="2"><i><a href="{{MEDIA_URL}}{{ post.historico_medicoes }}">relatorio.txt</i></td>
 						</tr>
 					</table>
 				</td>

@@ -19,10 +19,10 @@
 		</ul>
 	</div>
 
-	<form action="/cadastrar/" method="post">
+	<form action="/buscar/" method="post">
     	{% csrf_token %}
     	{{ form.as_table }}
-    	<input type="submit" value="Cadastrar" />
+    	<input type="submit" value="Buscar" />
 	</form>
 
     </body>

@@ -132,5 +132,5 @@ STATIC_URL = '/static/'
 
 CRONJOBS = [
 	('*/2 * * * *', 'diario.cron.amostragem'),
-	('* * * * *','diario.cron.postagem')
+	('*/2 * * * *','diario.cron.postagem')
 ]

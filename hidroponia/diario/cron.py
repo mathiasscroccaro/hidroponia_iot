@@ -1,22 +1,22 @@
-from .models import Post,Amostragem
+from .models import Post,Amostra
 
 def amostragem():
-	Amostragem.objects.create(ph=leituraSensores()[0],temp_agua=leituraSensores()[1],temp_ar=leituraSensores()[2],lux=leituraSensores()[3])
+	Amostra.objects.create(ph=leituraSensores()[0],temp_agua=leituraSensores()[1],temp_ar=leituraSensores()[2],lux=leituraSensores()[3])
 
 def postagem():
-	Post.objects.create(ph=leituraSensores()[0],temp_agua=leituraSensores()[1],temp_ar=leituraSensores()[2],lux=leituraSensores()[3])	
+	Post.objects.create(ph=leituraSensores()[0],temp_agua=leituraSensores()[1],temp_ar=leituraSensores()[2],lux=leituraSensores()[3],foto='camera.png')	
 
 def leituraSensores():
 
-	arquivo = "../interface/leitura.txt" 
+	arquivo = "/home/mathias/interface_web/hidroponia/interface/leitura.txt" 
 
 	try:
 		arq_sensores = open(arquivo,'r')	
 		leitura = arq_sensores.readline().split(';')
 		arq_sensores.close()
 	except:
-		print("Não foi possível abrir o arquivo %s" % (arquivo))
-		leitura = [0,0,0,0]	
+		print("Nao foi possivel abrir o arquivo %s" % (arquivo))
+		leitura = [6,6,6,6]	
 
 	return leitura
 	
@@ -25,7 +25,7 @@ def leituraSensores():
 	#	ser.timeout = 1	
 	#	ser.open()
 	#except:
-	#	print("Não foi possível conectar via serial")
+	#	print("Nao foi possivel conectar via serial")
 	#	return [0,0,0,0]
 
 	#dados = []

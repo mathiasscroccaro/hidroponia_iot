@@ -10,11 +10,8 @@ class Post(models.Model):
 	comentarios = models.TextField(default="(Amostragem feita automaticamente)")
 	data_publicacao = models.DateTimeField(auto_now=True,editable=False)
 	
-	# Histórico de um dia de medições
-	historico_medicoes = models.FileField(upload_to='historico/%Y/%m/%d',editable=True)
-
 	# Foto do cultivo
-	foto = models.FileField(upload_to='historico/%Y/%m/%d',editable=True)
+	foto = models.FileField(upload_to='historico/',editable=False)
 
 	# Medições feitas no exato momento da criação do post
 	ph = models.FloatField(editable=False,default=7.0)

@@ -1,8 +1,10 @@
 #!/usr/bin/env python
 import os
 import sys
+import matplotlib
 
 if __name__ == "__main__":
+    matplotlib.use("QT5Agg")
     os.environ.setdefault("DJANGO_SETTINGS_MODULE", "hidroponia.settings")
     try:
         from django.core.management import execute_from_command_line

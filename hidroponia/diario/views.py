@@ -2,6 +2,7 @@
 from __future__ import unicode_literals
 from django.shortcuts import render,redirect
 from django.core.urlresolvers import reverse
+from django.utils import timezone
 from django.http import HttpResponse, HttpResponseRedirect
 from .models import Post
 from .models import Amostra
@@ -59,7 +60,6 @@ def buscar(request,busca=None):
 def gerarGrafico(dados):
 	
 	### FIX <- corrigir timezone
-	matplotlib.use("qt4agg")
 
 	ph = []
 	temp_agua = []
@@ -90,33 +90,6 @@ def gerarGrafico(dados):
 	f.subplots_adjust(hspace=0.3)
 	plt.xlabel('Tempo')
 	f.savefig('./media/buscar.png')
+	plt.tick_params(axis='x',which='both',bottom='off',top='off',labelbottom='off')
 	plt.close('all')
 
-#def leituraSensores():
-#		
-#	try:
-#		ser = serial.Serial('/dev/ttyUSB0', 9600)
-#		ser.timeout = 1	
-#		ser.open()
-#	except:
-#		print("Não foi possível conectar via serial")
-#		return []
-#
-#	dados = []
-#
-#	ser.write("requisicao")
-#
-#	while (True):
-#		dado = ser.read(size=1)
-#		dado = str(dado,"utf-8")
-#
-#		if (dado == '\n'):
-#			dados = int(''.join(dados))
-#			print(dados)
-#			break
-#		else:
-#			dados.append(dado)
-#
-#	ser.close()
-#
-#	return dados.split(',')

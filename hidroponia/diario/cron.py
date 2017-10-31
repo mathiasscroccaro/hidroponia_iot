@@ -1,4 +1,5 @@
 from .models import Post,Amostra
+import os
 
 def amostragem():
 	Amostra.objects.create(ph=leituraSensores()[0],temp_agua=leituraSensores()[1],temp_ar=leituraSensores()[2],lux=leituraSensores()[3])
@@ -8,7 +9,7 @@ def postagem():
 
 def leituraSensores():
 
-	arquivo = "/home/mathias/interface_web/hidroponia/interface/leitura.txt" 
+	arquivo = "./leitura.txt" 
 
 	try:
 		arq_sensores = open(arquivo,'r')	
@@ -20,29 +21,3 @@ def leituraSensores():
 
 	return leitura
 	
-	#try:
-	#	ser = serial.Serial('/dev/ttyUSB0', 9600)
-	#	ser.timeout = 1	
-	#	ser.open()
-	#except:
-	#	print("Nao foi possivel conectar via serial")
-	#	return [0,0,0,0]
-
-	#dados = []
-
-	#ser.write("requisicao")
-
-	#while (True):
-	#	dado = ser.read(size=1)
-	#	dado = str(dado,"utf-8")
-
-	#	if (dado == '\n'):
-	#		dados = int(''.join(dados))
-	#		print(dados)
-	#		break
-	#	else:
-	#		dados.append(dado)
-
-	#ser.close()
-
-	#return dados.split(',')

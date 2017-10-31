@@ -25,7 +25,7 @@ SECRET_KEY = 'rx2iyfijq*l+l&h3doa-9sfwy%uu+xsns-yd5u87-_s1vxt)sg'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -131,6 +131,5 @@ STATIC_URL = '/static/'
 
 
 CRONJOBS = [
-	('*/2 * * * *', 'diario.cron.amostragem'),
-	('*/2 * * * *','diario.cron.postagem')
+	('*/2 * * * *', 'diario.cron.amostragem','>> crontab.log')
 ]

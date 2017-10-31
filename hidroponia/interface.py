@@ -25,7 +25,7 @@ class Interface():
 			print('camera iniciada com sucesso em %s' % (camera_caminho))		
 			self.camera = True
 		except:
-			print('camera não iniciada em %s' % (camera_caminho))
+			print('camera nao iniciada em %s' % (camera_caminho))
 		
 		try:
 			self.ser = serial.Serial(serial_caminho,9600)
@@ -33,7 +33,7 @@ class Interface():
 			print('conexao iniciada em %s com sucesso' % (serial_caminho))
 			self.serial = True
 		except:
-			print('conexao não iniciada em %s com sucesso' % (serial_caminho))
+			print('conexao nao iniciada em %s' % (serial_caminho))
 
 		self.rodar()		
 
@@ -43,7 +43,10 @@ class Interface():
 				self.tirar_foto()
 			if (self.serial):			
 				self.leitura_serial()
-				self.controle()		
+				self.controle()
+			if (self.serial is not True and self.camera is not True):
+				print('Nao ha nada a fazer\nSaindo...')
+				exit()		
 
 	def tirar_foto(self):
 		print('tirando foto...')
@@ -73,10 +76,12 @@ class Interface():
 		pass		
 
 	def __del__(self): 
-		print("Desligando camera")
-		self.cam.stop()
-		print('Desligando conexao serial')
-		self.ser.close()
+		if (self.camera is True):
+			print("Desligando camera")
+			self.cam.stop()
+		if (self.serial is True):
+			print('Desligando conexao serial')
+			self.ser.close()
 
 if __name__ == '__main__':
 	interface = Interface()

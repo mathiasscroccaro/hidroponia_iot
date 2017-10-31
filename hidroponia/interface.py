@@ -17,7 +17,7 @@ class Interface():
 		pygame.camera.init()
 		camera_caminho = '/dev/video0'
 
-		serial_caminho = '/dev/ttyUSB0'
+		serial_caminho = '/dev/ttyS3'
 		
 		try:
 			self.cam = pygame.camera.Camera(camera_caminho,(640,480))
@@ -55,19 +55,17 @@ class Interface():
 
 	def leitura_serial(self):
 		dados = []
-		self.ser.write("11")
-			
+		self.ser.write("00")
 		while (True):
 			dado = self.ser.read(size=1)
-			#dado = str(dado,"utf-8")
 			if (dado == '\n'):
-				dado.pop()
+				dados.pop()
 				dados = ''.join(dados)
-				print(dados)
 				break
 			else:
 				dados.append(dado)
 		
+		print(dados)	
 		arquivo = open(DIR_LEITURA,'w')
 		arquivo.write(dados)
 		arquivo.close()

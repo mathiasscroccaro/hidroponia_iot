@@ -1,0 +1,16 @@
+DEPENDENCIAS DO SITE:
+
+sudo apt-get install python3 python3-pip python3-matplotlib python3-pyqt5
+sudo pip3 install django
+sudo pip3 install django-crontab
+sudo pip3 install serial
+
+PARA RODÁ-LO LOCAL
+
+cd ./hidroponia_iot/hidroponia
+python3 manage.py runserver
+
+PARA RODÁ-LO NA REDE LAN
+
+cd ./hidroponia_iot/hidroponia
+python3 manage.py runserver 0.0.0.0:8000

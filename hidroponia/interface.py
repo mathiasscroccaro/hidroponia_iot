@@ -5,7 +5,7 @@ import pygame.camera
 
 DIR_IMAGEM = "./media/camera.jpg"
 DIR_LEITURA = "./interface/leitura.txt"
-DIR_CONTROLE = "./interface/controle.txt"
+DIR_CONTROLE = "./interface/controlar.txt"
 
 class Interface():
 

@@ -46,7 +46,10 @@ def controlar(request):
 	if request.method == 'POST':
 		form = ControleForm(request.POST)
 		if form.is_valid():
-			print(form.cleaned_data['ph_setpoint'])
+			arquivo = open('./interface/controlar.txt','w')
+			for dado in form.cleaned_data.values():
+				arquivo.write(str(dado) + ';')
+			arquivo.close()
 			return redirect('/temporeal')
 	else:
 		form = ControleForm()
@@ -102,8 +105,8 @@ def gerarGrafico(dados):
 	plt.xticks(rotation='vertical')
 	
 	f.subplots_adjust(hspace=0.3)
-	plt.xlabel('Tempo')
-	f.savefig('./media/buscar.png')
 	plt.tick_params(axis='x',which='both',bottom='off',top='off',labelbottom='off')
+	f.savefig('./media/buscar.png')
+	
 	plt.close('all')
 

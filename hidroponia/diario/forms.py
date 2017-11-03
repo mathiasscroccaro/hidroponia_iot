@@ -8,3 +8,7 @@ class Formulario(forms.Form):
 class BuscarForm(forms.Form):
 	data_inicial = forms.DateField(initial=timezone.now())
 	data_final = forms.DateField(initial=timezone.now())	
+
+class ControleForm(forms.Form):
+	ph_setpoint = forms.FloatField()
+        

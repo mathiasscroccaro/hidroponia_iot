@@ -9,4 +9,5 @@ urlpatterns = [
 	url(r'^temporeal/',views.temporeal),
 	url(r'^cadastrar/',views.cadastrar),
 	url(r'^buscar',views.buscar),
+    url(r'^controlar',views.controlar),
 ]

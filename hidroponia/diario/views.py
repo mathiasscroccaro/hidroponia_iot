@@ -8,6 +8,7 @@ from .models import Post
 from .models import Amostra
 from .forms import BuscarForm
 from .forms import Formulario
+from .forms import ControleForm
 from .cron import leituraSensores
 import matplotlib.pyplot as plt
 import matplotlib
@@ -40,6 +41,19 @@ def cadastrar(request):
 	dicionario = {}
 	dicionario['form'] = form	
 	return render(request,'cadastrar.html',dicionario)
+
+def controlar(request):
+	if request.method == 'POST':
+		form = ControleForm(request.POST)
+		if form.is_valid():
+			print(form.cleaned_data['ph_setpoint'])
+			return redirect('/temporeal')
+	else:
+		form = ControleForm()
+
+	dicionario = {}
+	dicionario['form'] = form	
+	return render(request,'controlar.html',dicionario)
 
 def buscar(request,busca=None):
 	if request.method == 'POST':

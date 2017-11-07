@@ -7,10 +7,13 @@ body {
 }
 
 .cabecalho {
+	width: 100vw;
+	font-size:2vw;
 	background-color:#2E8B57;
 	color: White;
 	padding-top:10px;
 	font-family: "Comic Sans MS", cursive, sans-serif;
+	transition: unset;
 }
 
 .post {
@@ -49,7 +52,7 @@ li a {
 	text-align: center;
 	padding: 14px 16px;
 	text-decoration: none;
-	transition: all 1s;
+	transition: unset;
 }
 
 li a:hover:not(.active) {

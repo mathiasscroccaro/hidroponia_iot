@@ -1,8 +1,9 @@
 
 body {
 	padding-top: 10px;
+	padding-bot: 10px;
 	text-align: center;
-	width:90%;
+	width:95%;
 	margin:auto;
 }
 
@@ -28,8 +29,15 @@ body {
 	font-family: "Comic Sans MS", cursive, sans-serif;
 }
 
+
+.fotos {
+	float:left;
+	display:block;
+	width:60%;
+}
+
 img {
-	max-width: 100%;
+	max-width: 80%;
 	margin: auto;
 	display: block;
 	height: auto;
@@ -65,15 +73,12 @@ li a:hover:not(.active) {
 }
 
 table {
-    	border-collapse: collapse;
-    	width: 100%;
-	background-color: White;
+		padding:1%;
+    
+    	width: 40%;
+		background-color: White;
 }
-
-#infos {
-	border:1px solid black;
-}
-
+	
 #row1 {
 	background-color: #333;
 	color:white;
@@ -82,18 +87,20 @@ table {
 
 td {
 	font-size:2vw;
-    	text-align: left;
-    	padding: 0px;
-	padding-top:5px;
-	padding-bottom:5px;
+    text-align: left;
+    padding-top:5px;
+    padding-bottom:5px;
+	
 }
-
-@media (max-width:800px){
-	td {
-	display:table-row;
-	width:80%;
+@media (max-width:600px){
+	table{
+		width:100%;
+		padding-top:8px;
+	}
+	.fotos{
+		width:100%;
+		padding-top:8px;
 	}
 }
 
 tr:nth-child(even){background-color: #f2f2f2}
-

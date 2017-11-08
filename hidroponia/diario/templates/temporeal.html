@@ -2,7 +2,7 @@
 
 <html>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<!meta http-equiv="refresh" content="2" />
+<meta http-equiv="refresh" content="2" />
     <head>
         <title>Diário de Cultivo :: Tempo Real</title>
 		<link rel="stylesheet" href="{% static 'estilo.css'%}">
@@ -19,34 +19,31 @@
 		</ul>
 	</div>
 
+		<div class="fotos">
+				<img src="{{MEDIA_URL}}camera.jpg">
+		</div>
+
+			
 		<table>
 			<tr>
-				<td><img src="{{MEDIA_URL}}camera.jpg"></td>
-				<td id="col_infos" width="40%">
-					<table id="infos">
-						<tr>
-							<td id="row1" colspan = "2"><b>&diams;  Dados da Última amostragem  &diams;</b><td>
-						</tr>
-						<tr>
-							<td>pH da água &#8594;</td>
-							<td>{{ medidas.0 }}</td>
-						</tr>
-						<tr>
-							<td>Temperatura da água &#8594;</td>
-							<td>{{ medidas.1 }}</td>
-						</tr>
-						<tr>
-							<td>Temperatura do ar &#8594;</td>
-							<td>{{ medidas.2 }}</td>
-						</tr>
-						<tr>
-							<td>Iluminância &#8594;</td>
-							<td>{{ medidas.3 }}</td>
-						</tr>
-					</table>
-				</td>
+				<td id="row1" colspan = "2"><b>&diams;  Dados da Última amostragem  &diams;</b><td>
 			</tr>
-		</table>
-
+			<tr>
+				<td>pH da água &#8594;</td>
+				<td>{{ medidas.0 }}</td>
+			</tr>
+			<tr>
+				<td>Temperatura da água &#8594;</td>
+				<td>{{ medidas.1 }}</td>
+			</tr>
+			<tr>
+				<td>Temperatura do ar &#8594;</td>
+				<td>{{ medidas.2 }}</td>
+			</tr>
+			<tr>
+				<td>Iluminância &#8594;</td>
+				<td>{{ medidas.3 }}</td>
+			</tr>
+		</table>			
     </body>
 </html>

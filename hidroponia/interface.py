@@ -55,7 +55,7 @@ class Interface():
 
 	def leitura_serial(self):
 		dados = []
-		self.ser.write("00")
+		#self.ser.write("00")
 		while (True):
 			dado = self.ser.read(size=1)
 			if (dado == '\n'):
@@ -71,7 +71,55 @@ class Interface():
 		arquivo.close()
 
 	def controle(self):
-		pass		
+		'''
+		[ph tempAgua tempAr lux]
+		'''		
+		leitura = open(DIR_LEITURA,'r')
+		dadosLeitura = leitura.readline().split(';')
+		leitura.close()
+
+		'''
+		[phSetPoint tempAguaSetPoint tempArSetPoint luxSetPoint]
+		'''
+		controle = open(DIR_CONTROLE,'r')
+		dadosControle = controle.readline().split(';')
+		controle.close()
+
+		comandoSerial = []
+		
+		histerese = 0.5
+		# Se ph medido for < ph setpoint
+		if (dadosLeitura[0] < dadosControle[0] - histerese):
+			comandoSerial.append(0)
+			comandoSerial.append(1)
+			print('ph Muito acima')
+		elif (dadosLeitura[0] > dadosControle[0] + histerese):
+			comandoSerial.append(1)
+			comandoSerial.append(0)
+		else:
+			comandoSerial.append(0)
+			comandoSerial.append(0)
+	
+		histerese = 3.0
+		# Se a temperatura da água estiver quente
+		if (dadosLeitura[1] > dadosControle[1] + histerese):
+			comandoSerial.append(0)
+		elif (dadosLeitura[2] > dadosControle[2] + histerese):
+			comandoSerial.append(0)
+		elif (dadosLeitura[1] < dadosControle[1] - histerese):
+			comandoSerial.append(1)
+		else:
+			comandoSerial.append(0)
+		
+		histerese = 500
+		# Se a iluminação estiver fraca
+		if (dadosLeitura[3] > dadosControle[3] + histerese):
+			comandoSerial.append(0)
+		elif (dadosLeitura[3] < dadosControle[3] - histerese):
+			comandoSerial.append(1)
+		else:
+			comandoSerial.append(0)
+				
 
 	def __del__(self): 
 		if (self.camera is True):

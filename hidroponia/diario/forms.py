@@ -11,4 +11,7 @@ class BuscarForm(forms.Form):
 
 class ControleForm(forms.Form):
 	ph_setpoint = forms.FloatField()
+	temperatura_agua_setpoint = forms.FloatField()
+	temperatura_ar_setpoint = forms.FloatField()
+	lux_setpoint = forms.FloatField()
         

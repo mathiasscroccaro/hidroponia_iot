@@ -85,6 +85,8 @@ class Interface():
 		dadosControle = controle.readline().split(';')
 		controle.close()
 
+		dadosControle.pop()
+
 		comandoSerial = []
 		
 		histerese = 0.5
@@ -119,6 +121,15 @@ class Interface():
 			comandoSerial.append(1)
 		else:
 			comandoSerial.append(0)
+		
+		enviar = ""
+
+		for i in comandoSerial:
+			enviar += str(i) + ';'
+
+		enviar.pop()
+			
+		self.ser.write(enviar)
 				
 
 	def __del__(self): 

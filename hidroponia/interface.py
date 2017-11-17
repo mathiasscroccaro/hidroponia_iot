@@ -103,7 +103,7 @@ class Interface():
 			comandoSerial.append(0)
 	
 		histerese = 3.0
-		# Se a temperatura da água estiver quente
+		# Se a temperatura da agua estiver quente
 		if (dadosLeitura[1] > dadosControle[1] + histerese):
 			comandoSerial.append(0)
 		elif (dadosLeitura[2] > dadosControle[2] + histerese):
@@ -114,7 +114,7 @@ class Interface():
 			comandoSerial.append(0)
 		
 		histerese = 500
-		# Se a iluminação estiver fraca
+		# Se a iluminacao estiver fraca
 		if (dadosLeitura[3] > dadosControle[3] + histerese):
 			comandoSerial.append(0)
 		elif (dadosLeitura[3] < dadosControle[3] - histerese):

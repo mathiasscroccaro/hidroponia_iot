@@ -2,9 +2,33 @@
 
 <html>
 <meta name="viewport" content="width=device-width"/>
-<meta http-equiv="refresh" content="2" />
     <head>
         <title>Diário de Cultivo :: Tempo Real</title>
+		<script language="JavaScript">
+			function refresh(node)
+			{
+			   var times = 1000; // gap in Milli Seconds;
+
+			   (function startRefresh()
+			   {
+				  var address;
+				  if(node.src.indexOf('?')>-1)
+				   address = node.src.split('?')[0];
+				  else 
+				   address = node.src;
+				  node.src = address+"?time="+new Date().getTime();
+
+				  setTimeout(startRefresh,times);
+			   })();
+
+			}
+
+			window.onload = function()
+			{
+			  var node = document.getElementById('imagem');
+			  refresh(node);
+			}
+		</script>
 		<link rel="stylesheet" href="{% static 'estilo.css'%}">
     </head>
     <body>
@@ -21,7 +45,7 @@
 
 		<table>
 			<tr>
-				<td><img src="{{MEDIA_URL}}camera.jpg"></td>
+				<td><img id="imagem" src="{{MEDIA_URL}}camera.jpg"></td>
 				<td width="40%">
 					<table>
 						<tr>

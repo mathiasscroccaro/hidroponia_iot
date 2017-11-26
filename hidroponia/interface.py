@@ -17,7 +17,7 @@ class Interface():
 		pygame.camera.init()
 		camera_caminho = '/dev/video0'
 
-		serial_caminho = '/dev/ttyS3'
+		serial_caminho = '/dev/ttyACM0'
 		
 		try:
 			self.cam = pygame.camera.Camera(camera_caminho,(640,480))
@@ -54,8 +54,9 @@ class Interface():
 		pygame.image.save(imagem,DIR_IMAGEM)	
 
 	def leitura_serial(self):
+		print('--- Leitura ---')
 		dados = []
-		#self.ser.write("00")
+		#self.ser.write("1011")
 		while (True):
 			dado = self.ser.read(size=1)
 			if (dado == '\n'):
@@ -67,17 +68,36 @@ class Interface():
 		
 		print(dados)	
 		arquivo = open(DIR_LEITURA,'w')
-		arquivo.write(dados)
+
+		print(dados.split(';'))
+
+		if (len(dados.split(';')) is not 4):
+			return
+
+		ph = float(dados.split(';')[3])*(-7.6418e-03)+1.0864e1
+
+		temp_agua = float(dados.split(';')[2])
+		temp_agua = temp_agua*temp_agua*1.3847e-5 + temp_agua*1.4471e-2 + 1.0304e1
+
+		temp_ar = float(dados.split(';')[1])
+		temp_ar = temp_ar*temp_ar*1.4096e-5 + temp_ar*1.3919e-2 + 1.0361e1
+
+		iluminancia = 10		
+	
+		print("ph:%.3f temp.agua: %.3f temp.ar: %.3f" % (ph,temp_agua,temp_ar))		
+				
+		arquivo.write("%.3f;%.3f;%.3f;%d" % (ph,temp_agua,temp_ar,iluminancia))
 		arquivo.close()
 
 	def controle(self):
+		print('--- Controle ---')		
 		'''
 		[ph tempAgua tempAr lux]
 		'''		
 		leitura = open(DIR_LEITURA,'r')
 		dadosLeitura = leitura.readline().split(';')
 		leitura.close()
-
+		
 		'''
 		[phSetPoint tempAguaSetPoint tempArSetPoint luxSetPoint]
 		'''
@@ -89,47 +109,45 @@ class Interface():
 
 		comandoSerial = []
 		
+		if (len(dadosLeitura) is not 4):
+			print(dadosLeitura)
+			return
+
 		histerese = 0.5
 		# Se ph medido for < ph setpoint
-		if (dadosLeitura[0] < dadosControle[0] - histerese):
+		if (float(dadosLeitura[0]) < float(dadosControle[1]) - histerese):
 			comandoSerial.append(0)
 			comandoSerial.append(1)
 			print('ph Muito acima')
-		elif (dadosLeitura[0] > dadosControle[0] + histerese):
+		elif (float(dadosLeitura[0]) > float(dadosControle[1]) + histerese):
 			comandoSerial.append(1)
 			comandoSerial.append(0)
 		else:
 			comandoSerial.append(0)
 			comandoSerial.append(0)
-	
+
 		histerese = 3.0
 		# Se a temperatura da agua estiver quente
-		if (dadosLeitura[1] > dadosControle[1] + histerese):
+		if (float(dadosLeitura[1]) > float(dadosControle[2]) + histerese):
 			comandoSerial.append(0)
-		elif (dadosLeitura[2] > dadosControle[2] + histerese):
+		elif (float(dadosLeitura[2]) > float(dadosControle[3]) + histerese):
 			comandoSerial.append(0)
-		elif (dadosLeitura[1] < dadosControle[1] - histerese):
+		elif (float(dadosLeitura[1]) < float(dadosControle[2]) - histerese):
 			comandoSerial.append(1)
 		else:
 			comandoSerial.append(0)
 		
 		histerese = 500
 		# Se a iluminacao estiver fraca
-		if (dadosLeitura[3] > dadosControle[3] + histerese):
+		if (float(dadosLeitura[3]) > float(dadosControle[0]) + histerese):
 			comandoSerial.append(0)
-		elif (dadosLeitura[3] < dadosControle[3] - histerese):
+		elif (float(dadosLeitura[3]) < float(dadosControle[0]) - histerese):
 			comandoSerial.append(1)
 		else:
 			comandoSerial.append(0)
-		
-		enviar = ""
+					
 
-		for i in comandoSerial:
-			enviar += str(i) + ';'
-
-		enviar.pop()
-			
-		self.ser.write(enviar)
+		self.ser.write(''.join(str(v) for v in comandoSerial))
 				
 
 	def __del__(self): 

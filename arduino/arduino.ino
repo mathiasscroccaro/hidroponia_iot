@@ -7,27 +7,30 @@ Professor Dr. Fabiano Fruett
 
 Alunos:  Euclides
          Mathias
+         Stenio
          Talles
-
 */
 
 #define TAXA_AMOSTRAGEM 1000/8
 
 /* Pinos a serem utilizados no projeto */
-#define pinoSensor 0
-#define pinoAlarme 13
-#define pinoAtuador 3
+#define pinoAtuador0 3
+#define pinoAtuador1 5
+#define pinoAtuador2 6
+#define pinoAtuador3 9
 
 void setup() 
 { 
   /* Inicializa comunicacao serial a 9600 bps */  
   Serial.begin(9600);
   
-  /* Configura pinos do alarme e atuador(aquecedor) como saida */
-  pinMode(pinoAlarme, OUTPUT);
-  pinMode(pinoAtuador, OUTPUT);
+  /* Configura pinos dos atuadores como saida como saida */
+  pinMode(pinoAtuador0, OUTPUT);
+  pinMode(pinoAtuador1, OUTPUT);
+  pinMode(pinoAtuador2, OUTPUT);
+  pinMode(pinoAtuador3, OUTPUT);
   
-  /* Referncia do ADC em 2,5 V */
+  /* Referncia do ADC em 5,0 V */
   analogReference(EXTERNAL);  
 }
 
@@ -66,8 +69,7 @@ void loop() {
       leituraSensores += String(analogRead(i),DEC) + ';';
     else
       leituraSensores += String(analogRead(i),DEC);
-  
-	delay(TAXA_AMOSTRAGEM); 
+    delay(TAXA_AMOSTRAGEM); 
   }
   
   /* Envia valor amostrado via serial */
@@ -79,11 +81,13 @@ void loop() {
     /* Realiza a leitura serial */
     leituraSerial = leSerial();
     
-    /* Se o primeiro caracter do pacote recebido for 0, desliga o alarme. Caso contrario o liga */
-    (leituraSerial.charAt(0)=='0') ? (digitalWrite(pinoAlarme, LOW)) : (digitalWrite(pinoAlarme, HIGH));
+    /* Se o primeiro caracter do pacote recebido for 0, desliga o atuador. Caso contrario o liga */
+    (leituraSerial.charAt(0)=='0') ? (digitalWrite(pinoAtuador0, LOW)) : (digitalWrite(pinoAtuador0, HIGH));
     /* Se o segundo caracter do pacote recebido for 0, desliga o atuador. Caso contrario o liga */
-    (leituraSerial.charAt(1)=='0') ? (digitalWrite(pinoAtuador, LOW)) : (digitalWrite(pinoAtuador, HIGH));    
+    (leituraSerial.charAt(1)=='0') ? (digitalWrite(pinoAtuador1, LOW)) : (digitalWrite(pinoAtuador1, HIGH));
+    /* Se o terceiro caracter do pacote recebido for 0, desliga o atuador. Caso contrario o liga */
+    (leituraSerial.charAt(2)=='0') ? (digitalWrite(pinoAtuador2, LOW)) : (digitalWrite(pinoAtuador2, HIGH));        
+    /* Se o quarto caracter do pacote recebido for 0, desliga o atuador. Caso contrario o liga */
+    (leituraSerial.charAt(3)=='0') ? (digitalWrite(pinoAtuador3, LOW)) : (digitalWrite(pinoAtuador3, HIGH));    
   }
-  
-  /* Espera intervado de 500ms */
 }

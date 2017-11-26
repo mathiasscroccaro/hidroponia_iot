@@ -1,0 +1,35 @@
+\Large
+
+\begin{tikzpicture}
+\begin{axis}
+[title={pH ao longo do tempo},ylabel={ph [H$^+$]}, xtick=\empty, height=0.45\textheight]
+\addplot table [x=a, y=b, col sep=comma] {data.csv};
+\end{axis}
+\end{tikzpicture}
+
+\hfill
+
+\begin{tikzpicture}
+\begin{axis}
+[title={Temperatura da agua ao longo do tempo},ylabel={Temperatura [C]}, xtick=\empty, height=0.45\textheight]
+\addplot table [x=a, y=c, col sep=comma] {data.csv};
+\end{axis}
+\end{tikzpicture}
+
+\begin{tikzpicture}
+\begin{axis}
+[title={Temperatura ambiente ao longo do tempo},ylabel={Temperatura [C]}, xtick=\empty, height=0.45\textheight]
+\addplot table [x=a, y=d, col sep=comma] {data.csv};
+\end{axis}
+\end{tikzpicture}
+
+\hfill
+
+\begin{tikzpicture}
+\begin{axis}
+[title={Iluminancia ao longo do tempo},ylabel={lux}, xtick=\empty, height=0.45\textheight]
+\addplot table [x=a, y=e, col sep=comma] {data.csv};
+\end{axis}
+\end{tikzpicture}
+
+\end{document}

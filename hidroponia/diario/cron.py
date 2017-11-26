@@ -2,7 +2,7 @@ from .models import Post,Amostra
 import os
 
 def amostragem():
-	leitura = leituraSensores(arquivo = '/home/mathias/interface_web/hidroponia_iot/hidroponia/interface/leitura.txt')
+	leitura = leituraSensores(arquivo = '/home/mathias/hidroponia_iot/hidroponia/interface/leitura.txt')
 	Amostra.objects.create(ph=leitura[0],temp_agua=leitura[1],temp_ar=leitura[2],lux=leitura[3])
 
 def postagem():

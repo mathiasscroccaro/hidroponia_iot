@@ -13,6 +13,7 @@ from .cron import leituraSensores
 import matplotlib.pyplot as plt
 import matplotlib
 import serial
+import os
 
 def index(request):
 	return redirect('/temporeal')
@@ -66,7 +67,7 @@ def buscar(request,busca=None):
 			final = form.cleaned_data['data_final']
 			dados = Amostra.objects.filter(data_amostragem__range=(inicial,final))
 			gerarGrafico(dados)
-			return redirect('/media/buscar.png')
+			return redirect('/media/buscar.pdf')
 	else:
 		form = BuscarForm()
 
@@ -91,6 +92,34 @@ def gerarGrafico(dados):
 		temp_ar.append(dado.temp_ar)
 		lux.append(dado.lux)
 
+	arqPre = open('preLatex.tex','r')
+	texto = arqPre.read()
+	arqPre.close()	
+
+	i=0
+	for dado in data:
+		texto += str(i) + ',' + str(ph[i]) + ',' + str(temp_agua[i]) + ',' + str(temp_ar[i]) + ',' + str(lux[i]) + '\n'
+		i=i+1
+	
+	arqPrepos = open('preposLatex.tex')
+	texto += arqPrepos.read()
+	arqPrepos.close()
+
+	texto += "\n%s a %s\n" % (data[0].strftime("%d/%m/%y"),data[-1].strftime("%d/%m/%y"))
+	
+	arqPos = open('posLatex.tex','r')
+	texto += arqPos.read()
+	arqPos.close()
+			
+	arqLatex = open('main.tex','w')
+	arqLatex.write(texto)
+	arqLatex.close()
+
+	os.system('latex main.tex > /dev/null')
+	os.system('dvipdf main.dvi ./media/buscar.pdf > /dev/null')
+	os.system('rm main.log main.aux main.dvi data.csv')
+
+	'''
 	f, (ax1,ax2,ax3,ax4) = plt.subplots(4,sharex=True)
 	
 	ax1.plot(ph)
@@ -109,4 +138,6 @@ def gerarGrafico(dados):
 	f.savefig('./media/buscar.png')
 	
 	plt.close('all')
+
+	'''
 
